@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-eyebrow">⚡ {{ empresa.nome|upper }}</div>
+    <h1 class="hero-title">
+        <span class="line">Energia que</span>
+        <span class="line accent">transforma marcas</span>
+        <span class="line">em movimento.</span>
+    </h1>
+    <p class="hero-sub">{{ empresa.slogan }}</p>
+    <a href="/contato" class="btn btn-primary">Iniciar projeto</a>
+</section>
+
+<section class="services-preview">
+    <h2 class="section-title">O que fazemos</h2>
+    <div class="services-grid">
+        {% for s in servicos %}
+        <div class="service-card">
+            <span class="service-spark">⚡</span>
+            <h3>{{ s.title }}</h3>
+            <p>{{ s.description }}</p>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="/servicos" class="link-more">Ver todos os serviços →</a>
+</section>
+{% endblock %}
