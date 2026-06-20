@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="auth-wrap">
+    <h1>Entrar</h1>
+    <form class="auth-form" method="POST" action="/login">
+        <label for="email">E-mail</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" required>
+
+        <button type="submit" class="btn btn-primary">Entrar</button>
+    </form>
+    <p class="auth-switch">Ainda não tem conta? <a href="/cadastro">Cadastre-se</a></p>
+</section>
+{% endblock %}

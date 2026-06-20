@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="page-hero">
+    <span class="page-eyebrow">PAINEL</span>
+    <h1>Olá, {{ current_user.name }}</h1>
+</section>
+
+{% if current_user.is_admin %}
+<section class="dashboard-grid">
+    <div class="dashboard-block">
+        <h2>Mensagens recebidas</h2>
+        {% for m in mensagens %}
+        <div class="message-card">
+            <strong>{{ m.name }}</strong> — {{ m.email }}
+            <p>{{ m.message }}</p>
+            <span class="message-date">{{ m.created_at.strftime('%d/%m/%Y %H:%M') }}</span>
+        </div>
+        {% else %}
+        <p>Nenhuma mensagem ainda.</p>
+        {% endfor %}
+    </div>
+
+    <div class="dashboard-block">
+        <h2>Gerenciar serviços</h2>
+        <form class="service-form" method="POST" action="/dashboard/servico/novo">
+            <input type="text" name="titulo" placeholder="Título do serviço" required>
+            <textarea name="descricao" placeholder="Descrição" rows="3" required></textarea>
+            <button type="submit" class="btn btn-secondary">Adicionar serviço</button>
+        </form>
+
+        {% for s in servicos %}
+        <div class="service-edit-card">
+            <div>
+                <strong>{{ s.title }}</strong>
+                <p>{{ s.description }}</p>
+            </div>
+            <form method="POST" action="/dashboard/servico/{{ s.id }}/excluir">
+                <button type="submit" class="btn-delete">Excluir</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+{% else %}
+<section class="page-content">
+    <p>Você está logado como cliente. Em breve, novidades exclusivas aparecerão aqui.</p>
+</section>
+{% endif %}
+{% endblock %}
